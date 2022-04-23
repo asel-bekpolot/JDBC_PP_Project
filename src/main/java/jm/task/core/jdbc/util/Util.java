@@ -1,0 +1,31 @@
+package jm.task.core.jdbc.util;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class Util {
+    private static final String USERNAME = "root";
+    private static final String PASSWORD = "H@cH1k0";
+    private static final String URL = "jdbc:mysql://localhost:3306/business";
+
+    public static Connection myConnection() {
+        Connection connection=null;
+        try {
+            connection = DriverManager.getConnection(URL, USERNAME, PASSWORD);
+            connection.setAutoCommit(false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return connection;
+    }
+
+
+    public static void closeConnection(){
+        try {
+            myConnection().close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
